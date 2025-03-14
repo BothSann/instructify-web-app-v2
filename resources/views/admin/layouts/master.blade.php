@@ -12,7 +12,7 @@
 <body class="bg-gray-100">
     <!-- Sidebar -->
     <div class="flex h-screen">
-
+        @include('admin.layouts.sidebar')
         <!-- Main Content -->
         <div class="flex-1 overflow-auto">
             <!-- Top Navigation -->

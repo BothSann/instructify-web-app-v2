@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(["middleware" => ["guest:admin"], "prefix"=> "admin", "as"=> "admin."], function () {
@@ -20,7 +21,8 @@ Route::group(["middleware" => ["guest:admin"], "prefix"=> "admin", "as"=> "admin
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::post('login', [AuthenticatedSessionController::class, 'store'])
+        ->name('login.post');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
@@ -57,7 +59,6 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
 
-    Route::get('/dashboard', function () {
-
-    });
+    Route::get('/dashboard', [AdminController::class, "index"])
+        ->name('dashboard');
 });
