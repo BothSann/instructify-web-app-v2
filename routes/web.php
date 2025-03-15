@@ -1,15 +1,17 @@
 <?php
 
+use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// })->middleware('custom.guest:web,admin');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth:web', 'verified'])->name('dashboard');
+Route::get('/', [FrontendController::class,'index'])->name('homepage');
+
+Route::get('/dashboard', [FrontendController::class,'index'])
+    ->middleware(['auth:web', 'verified'])->name('dashboard');
 
 Route::middleware('auth:web')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -24,7 +24,7 @@
                         <i class="text-xl text-green-500 fas fa-users"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Active Users</p>
+                        <p class="text-gray-500 texxt-sm">Active Users</p>
                         <p class="text-2xl font-semibold">1,342</p>
                     </div>
                 </div>
