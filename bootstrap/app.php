@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckBanned;
 use App\Http\Middleware\CustomRedirectIfAuthenticated;
 
 use Illuminate\Foundation\Application;
@@ -15,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         //
         $middleware->alias([
-            'custom.guest' => CustomRedirectIfAuthenticated::class
+            'custom.guest' => CustomRedirectIfAuthenticated::class,
+            'check.banned' => CheckBanned::class
         ] );
     })
     ->withExceptions(function (Exceptions $exceptions) {
