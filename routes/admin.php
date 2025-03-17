@@ -77,6 +77,7 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
     Route::post('/users/store', [AdminController::class, 'storeUser'])->name('users.store');
     Route::post('/users/{user}/ban', [AdminController::class, 'banUser'])->name(name: 'users.ban');
     Route::post('/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('users.unban');
+    Route::delete('/users/{user}/delete', [AdminController::class, 'deleteUser'])->name('users.delete');
 });
 
 
