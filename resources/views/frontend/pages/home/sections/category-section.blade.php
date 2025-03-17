@@ -5,7 +5,7 @@
     </h2>
     <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
         <!-- Category Card 1 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -18,7 +18,7 @@
         </a>
 
         <!-- Category Card 2 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -30,7 +30,7 @@
         </a>
 
         <!-- Category Card 3 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -42,7 +42,7 @@
         </a>
 
         <!-- Category Card 4 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -55,7 +55,7 @@
         </a>
 
         <!-- Category Card 5 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -67,7 +67,7 @@
         </a>
 
         <!-- Category Card 6 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -79,7 +79,7 @@
         </a>
 
         <!-- Category Card 7 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -91,7 +91,7 @@
         </a>
 
         <!-- Category Card 8 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -104,7 +104,7 @@
         </a>
 
         <!-- Category Card 9 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">
@@ -116,7 +116,7 @@
         </a>
 
         <!-- Category Card 10 -->
-        <a href="#" class="group">
+        <a href="{{ route('manuals.index') }}" class="group">
             <div
                 class="flex flex-col items-center p-4 transition-all border border-gray-200 rounded-lg bg-gray-50 hover:bg-indigo-50 hover:border-indigo-300">
                 <div class="flex items-center justify-center w-12 h-12 mb-3 text-indigo-600 bg-indigo-100 rounded-md">

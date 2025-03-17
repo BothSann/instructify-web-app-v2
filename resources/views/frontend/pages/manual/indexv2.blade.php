@@ -128,138 +128,6 @@
                                 </td>
                             </tr>
                         @endforeach
-
-                        {{-- <!-- Manual Item 2 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md">
-                                        <i class="text-gray-500 fas fa-file-pdf"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            Sony Bravia 55X80J 4K TV
-                                        </div>
-                                        <div class="max-w-xs text-sm text-gray-500 truncate">
-                                            Complete user guide and setup instructions
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Electronics</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Mar 5, 2023</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
-                                    Pending Review
-                                </span>
-                            </td>
-                        </tr>
-
-                        <!-- Manual Item 3 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md">
-                                        <i class="text-gray-500 fas fa-file-pdf"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            Bosch Dishwasher SHX87PW55N
-                                        </div>
-                                        <div class="max-w-xs text-sm text-gray-500 truncate">
-                                            Installation and operation guide
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
-                                    Kitchen Appliances
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Feb 28, 2023</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">
-                                    Denied
-                                </span>
-                            </td>
-                        </tr>
-
-                        <!-- Manual Item 4 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md">
-                                        <i class="text-gray-500 fas fa-file-pdf"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            Dell XPS 15 9510 Laptop
-                                        </div>
-                                        <div class="max-w-xs text-sm text-gray-500 truncate">
-                                            User manual and troubleshooting guide
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">
-                                    Computer & Accessories
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Feb 22, 2023</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                    Approved
-                                </span>
-                            </td>
-                        </tr>
-
-                        <!-- Manual Item 5 -->
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md">
-                                        <i class="text-gray-500 fas fa-file-pdf"></i>
-                                    </div>
-                                    <div class="ml-4">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            DeWalt DCD777 Drill
-                                        </div>
-                                        <div class="max-w-xs text-sm text-gray-500 truncate">
-                                            Operation manual and safety information
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Tools & Hardware</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">Feb 15, 2023</div>
-                            </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <span
-                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
-                                    Pending Review
-                                </span>
-                            </td>
-                        </tr> --}}
                     </tbody>
                 </table>
             </div>
@@ -281,8 +149,8 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Showing <span class="font-medium">1</span> to
-                                <span class="font-medium">5</span> of
-                                <span class="font-medium">12</span> results
+                                <span class="font-medium">{{ count($manuals) }}</span> of
+                                <span class="font-medium">{{ count($manuals) }}</span> results
                             </p>
                         </div>
                         <div>
