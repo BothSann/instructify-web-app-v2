@@ -14,7 +14,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Total Manuals</p>
-                        <p class="text-2xl font-semibold">248</p>
+                        <p class="text-2xl font-semibold">{{ $manualsCount }}</p>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                     </div>
                     <div>
                         <p class="text-gray-500 texxt-sm">Active Users</p>
-                        <p class="text-2xl font-semibold">1,342</p>
+                        <p class="text-2xl font-semibold">{{ $usersCount }}</p>
                     </div>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-500">Pending Approvals</p>
-                        <p class="text-2xl font-semibold">24</p>
+                        <p class="text-2xl font-semibold">{{ $pendingApprovals }}</p>
                     </div>
                 </div>
             </div>
@@ -46,8 +46,8 @@
                         <i class="text-xl text-red-500 fas fa-flag"></i>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500">Open Complaints</p>
-                        <p class="text-2xl font-semibold">16</p>
+                        <p class="text-sm text-gray-500">Resolved Complaints</p>
+                        <p class="text-2xl font-semibold">{{ $resolvedComplaints }}</p>
                     </div>
                 </div>
             </div>

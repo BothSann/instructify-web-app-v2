@@ -4,25 +4,35 @@
         <h1 class="text-xl font-bold">Instructify Manager</h1>
     </div>
     <nav>
-        <a href="#" class="flex items-center px-4 py-3 mb-2 bg-indigo-900 rounded-lg">
+        <a href="{{ route('admin.dashboard') }}"
+            class="flex items-center px-4 py-3 mb-2  rounded-lg hover:bg-indigo-700
+                {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-900' : '' }}
+             ">
             <i class="mr-3 fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
-        <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700">
+        <a href="{{ route('admin.manuals.index') }}"
+            class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700
+                {{ request()->routeIs('admin.manuals.index') ? 'bg-indigo-900' : '' }}
+             ">
             <i class="mr-3 fas fa-book"></i>
             <span>Manuals</span>
         </a>
-        <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700">
+        <a href="{{ route('admin.users.index') }}"
+            class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700 {{ request()->routeIs('admin.users.index') ? 'bg-indigo-900' : '' }}">
             <i class="mr-3 fas fa-users"></i>
             <span>Users</span>
         </a>
-        <a href="#" class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700">
+        <a href="{{ route('admin.complaints.index') }}"
+            class="flex items-center px-4 py-3 mb-2 rounded-lg hover:bg-indigo-700
+                {{ request()->routeIs('admin.complaints.index') ? 'bg-indigo-900' : '' }}    
+            ">
             <i class="mr-3 fas fa-flag"></i>
             <span>Complaints</span>
         </a>
 
         <div class="my-4 border-t border-indigo-700 rounded-lg hover:bg-indigo-700">
-            <form action="" method="POST">
+            <form action="" method="">
                 @csrf
                 <button type="submit" class="flex items-center px-4 py-3 mb-2">
                     <i class="mr-3 fas fa-cog"></i>

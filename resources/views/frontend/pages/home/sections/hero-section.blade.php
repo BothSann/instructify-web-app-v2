@@ -10,21 +10,15 @@
                 your devices.
             </p>
         </div>
-        <div class="max-w-xl mx-auto mt-10">
-            <div class="flex rounded-md shadow-sm">
-                <div class="relative flex-grow focus-within:z-10">
-                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                        <i class="text-gray-400 fas fa-search"></i>
-                    </div>
-                    <input type="text" name="search" id="search"
-                        class="block w-full h-12 pl-10 border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500 rounded-l-md sm:text-sm"
-                        placeholder="Enter device name, model number, or brand..." />
+        <div class="flex items-center justify-center max-w-xl mx-auto mt-10">
+            <form action="{{ route('manuals.index') }}" method="GET">
+                <div class="flex rounded-md shadow-sm">
+                    <button type="submit"
+                        class="relative inline-flex items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-white bg-indigo-900 border border-transparent rounded-md hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <span>Start Searching Now</span>
+                    </button>
                 </div>
-                <button
-                    class="relative inline-flex items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-white bg-indigo-900 border border-transparent rounded-r-md hover:bg-indigo-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    <span>Search</span>
-                </button>
-            </div>
+            </form>
         </div>
     </div>
 </section>

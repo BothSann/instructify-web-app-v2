@@ -13,7 +13,7 @@
         <div class="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
             <div class="sm:flex">
                 <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                    <a href="#"
+                    <a href="{{ route('manuals.create') }}"
                         class="flex items-center justify-center w-full px-5 py-3 text-base font-medium text-indigo-600 bg-white border border-transparent rounded-md hover:bg-indigo-50">
                         Upload Manual
                     </a>
