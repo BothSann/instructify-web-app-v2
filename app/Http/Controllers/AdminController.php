@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreManualRequest;
 use App\Models\Admin;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
+use App\Models\Category;
 use App\Models\Complaint;
 use App\Models\Manual;
 use App\Models\User;
@@ -206,5 +208,46 @@ class AdminController extends Controller
 
         return redirect()->route('admin.users.index')
         ->with('success', 'User created successfully.');
+    }
+
+    public function createManual()
+    {
+        $categories = Category::all();
+        return view('admin.pages.manual.create', compact('categories'));
+    }
+    
+    public function storeManual(StoreManualRequest $request)
+    {
+        
+    
+        // Create new manual instance
+        $manual = new Manual();
+        $manual->title = $request->manual_title;
+        $manual->description = $request->manual_description;
+        $manual->category_id = $request->category_id;
+        $manual->uploaded_by_admin = Auth::guard('admin')->id();
+        $manual->uploaded_by = null;
+        $manual->status = 'approved'; // Auto-approve when added by admin
+    
+        // Handle file upload
+        if ($request->hasFile("manual_file") && $request->file("manual_file")->isValid()) {
+            $fileName = $request->file("manual_file")->store('', 'public');
+            $filePath = "uploads/manuals/$fileName";
+    
+            // Full path for storing in database
+            $manual->file_path = $filePath;
+    
+            // Get the file size in MB
+            $manual->file_size = number_format($request->file('manual_file')->getSize() / (1024 * 1024), 2);
+    
+            $manual->save();
+            
+            return redirect()->route('admin.manuals.index')
+                ->with('success', 'Manual added successfully.');
+        }
+        
+        return redirect()->back()
+            ->with('error', 'Failed to upload manual file.')
+            ->withInput();
     }
 }

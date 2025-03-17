@@ -73,4 +73,20 @@ class Manual extends Model
     {
         return $query->where('status', 'rejected');
     }
+
+    // Relationship with admin users
+    public function admin()
+    {
+        return $this->belongsTo(Admin::class, 'uploaded_by_admin');
+    }
+
+    // Helper method to get uploader info regardless of type
+    public function getUploaderAttribute()
+    {
+        if ($this->uploaded_by_admin) {
+            return $this->admin;
+        }
+        
+        return $this->user;
+    }
 }

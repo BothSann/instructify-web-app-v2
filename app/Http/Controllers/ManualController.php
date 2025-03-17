@@ -59,7 +59,7 @@ class ManualController extends Controller
         $manual->title = $request->manual_title;
         $manual->description = $request->manual_description;
         $manual->category_id = $request->category_id;
-        $manual->uploaded_by = Auth::check() ? Auth::id() : null;
+        $manual->uploaded_by = Auth::id();
 
         // Handle file upload
         if($request->hasFile("manual_file") && $request->file("manual_file")->isValid()) {
