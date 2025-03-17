@@ -1,0 +1,316 @@
+@extends('frontend.layouts.master')
+@section('content')
+    @if (session('success'))
+        <div class="px-4 py-3 mb-4 text-sm text-green-700 bg-green-100 rounded">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="px-4 py-3 mb-4 text-sm text-red-700 bg-red-100 rounded">
+            {{ session('error') }}
+        </div>
+    @endif
+    <div class="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="overflow-hidden bg-white rounded-lg shadow">
+            <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
+                <h1 class="text-xl font-semibold text-gray-900">
+                    My Uploaded Complaints
+                </h1>
+                <p class="mt-1 text-sm text-gray-600">
+                    Track the status of complaints you've submitted to the system.
+                </p>
+            </div>
+
+            <!-- Filter options -->
+            <div class="px-4 py-3 border-b border-gray-200 bg-gray-50">
+                <div class="flex flex-wrap items-center justify-between">
+                    <div class="flex space-x-4">
+                        <div>
+                            <label for="status-filter" class="sr-only">Filter by status</label>
+                            <select id="status-filter" name="status"
+                                class="block w-full py-2 pl-3 pr-10 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="all" disabled selected>All Statuses</option>
+                                <option value="pending">Under Review</option>
+                                <option value="in-progress">In Progress</option>
+                                <option value="resolved">Resolved</option>
+                                <option value="closed">Closed</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="category-filter" class="sr-only">Filter by category</label>
+                            <select id="category-filter" name="category"
+                                class="block w-full py-2 pl-3 pr-10 text-sm border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                                <option value="all">All Categories</option>
+                                <option value="1">Product Defect</option>
+                                <option value="2">Service Quality</option>
+                                <option value="3">Billing Issue</option>
+                                <option value="4">Delivery Problem</option>
+                                <option value="5">Technical Support</option>
+                                <option value="6">Warranty Claim</option>
+                                <option value="7">Return/Refund</option>
+                                <option value="8">Customer Service</option>
+                                <option value="9">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mt-3 sm:mt-0">
+                        <div class="relative rounded-md shadow-sm">
+                            <input type="text" name="search" id="search"
+                                class="block w-full pr-10 border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                placeholder="Search complaints..." />
+                            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                <i class="text-gray-400 fas fa-search"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complaints List -->
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Complaint Title
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Submission Date
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Status
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Complaint Item 1 -->
+                        @foreach ($complaints as $complaint)
+                            <tr
+                                class="
+                                {{ $complaint->getComplaintStatusKey() == 'pending' ? 'text-yellow-800 bg-yellow-100' : '' }}
+                                {{ $complaint->getComplaintStatusKey() == 'resolved' ? 'text-green-800 bg-green-100' : '' }}
+                                {{ $complaint->getComplaintStatusKey() == 'dismissed' ? 'text-red-800 bg-red-100' : '' }}
+                                ">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded">
+                                            <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $complaint->getComplaintTypeName() }}
+                                            </div>
+                                            <div class="max-w-xs text-sm text-gray-500 truncate">
+                                                {{ $complaint->description }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm text-gray-900">{{ $complaint->created_at->format('M d, Y') }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
+                                        {{ $complaint->getComplaintStatusKey() == 'pending'
+                                            ? 'text-yellow-800 bg-yellow-100'
+                                            : ($complaint->getComplaintStatusKey() == 'resolved'
+                                                ? 'text-green-800 bg-green-100'
+                                                : ($complaint->getComplaintStatusKey() == 'dismissed'
+                                                    ? 'text-red-800 bg-red-100'
+                                                    : '')) }}
+                                    ">
+                                        {{ $complaint->getComplaintStatusName() }}
+                                    </span>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        {{-- <!-- Complaint Item 2 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex items-center justify-center w-12 h-12 bg-red-100 rounded">
+                                        <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            Incorrect Billing Amount on Monthly Statement
+                                        </div>
+                                        <div class="max-w-xs text-sm text-gray-500 truncate">
+                                            Charged $129.99 instead of advertised $99.99
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Billing Issue</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Mar 8, 2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
+                                    In Progress
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- Complaint Item 3 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex items-center justify-center w-12 h-12 bg-red-100 rounded">
+                                        <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            Poor Customer Service from Technical Support
+                                        </div>
+                                        <div class="max-w-xs text-sm text-gray-500 truncate">
+                                            Representative was unhelpful and disconnected call
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">
+                                    Customer Service
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Mar 3, 2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-yellow-800 bg-yellow-100 rounded-full">
+                                    Under Review
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- Complaint Item 4 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex items-center justify-center w-12 h-12 bg-red-100 rounded">
+                                        <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            Late Delivery of Online Order #5493271
+                                        </div>
+                                        <div class="max-w-xs text-sm text-gray-500 truncate">
+                                            Guaranteed 2-day delivery took over a week
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">
+                                    Delivery Problem
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Feb 25, 2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-gray-800 bg-gray-100 rounded-full">
+                                    Closed
+                                </span>
+                            </td>
+                        </tr>
+
+                        <!-- Complaint Item 5 -->
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="flex items-center justify-center w-12 h-12 bg-red-100 rounded">
+                                        <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">
+                                            Warranty Repair Claim for Dell XPS Laptop
+                                        </div>
+                                        <div class="max-w-xs text-sm text-gray-500 truncate">
+                                            Battery swelling issue on laptop under warranty
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Warranty Claim</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">Feb 18, 2023</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span
+                                    class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full">
+                                    In Progress
+                                </span>
+                            </td>
+                        </tr> --}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex justify-between flex-1 sm:hidden">
+                        <a href="#"
+                            class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                            Previous
+                        </a>
+                        <a href="#"
+                            class="relative inline-flex items-center px-4 py-2 ml-3 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                            Next
+                        </a>
+                    </div>
+                    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                            <p class="text-sm text-gray-700">
+                                Showing <span class="font-medium">1</span> to
+                                <span class="font-medium">5</span> of
+                                <span class="font-medium">14</span> results
+                            </p>
+                        </div>
+                        <div>
+                            <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                                <a href="#"
+                                    class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
+                                    <span class="sr-only">Previous</span>
+                                    <i class="w-5 h-5 fas fa-chevron-left"></i>
+                                </a>
+                                <a href="#" aria-current="page"
+                                    class="relative z-10 inline-flex items-center px-4 py-2 text-sm font-medium text-indigo-600 border border-indigo-500 bg-indigo-50">
+                                    1
+                                </a>
+                                <a href="#"
+                                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">
+                                    2
+                                </a>
+                                <a href="#"
+                                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 hover:bg-gray-50">
+                                    3
+                                </a>
+                                <a href="#"
+                                    class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50">
+                                    <span class="sr-only">Next</span>
+                                    <i class="w-5 h-5 fas fa-chevron-right"></i>
+                                </a>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

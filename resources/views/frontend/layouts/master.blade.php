@@ -11,20 +11,14 @@
 
 <body class="bg-gray-50 font-roboto">
     <div class="flex flex-col min-h-screen">
-        @include('frontend.layouts.header');
+        @include('frontend.layouts.header')
         <!-- Main Content -->
         <main class="flex-grow">
-            @include('frontend.pages.home.sections.hero-section');
-            <!-- Content Section -->
-            <div class="relative -mt-32">
-                <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    @include('frontend.pages.home.sections.category-section');
-                    @include('frontend.pages.home.sections.cta-section');
-                </div>
-            </div>
+            @yield('content')
         </main>
-        @include('frontend.layouts.footer');
+        @include('frontend.layouts.footer')
     </div>
+    @stack('scripts')
 </body>
 
 </html>

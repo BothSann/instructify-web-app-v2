@@ -8,21 +8,29 @@
                      <span class="text-xl font-bold text-gray-800">Instructify Library</span>
                  </div>
                  <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                     <a href="#"
-                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-indigo-600 border-b-2 border-indigo-500">
+                     <a href="{{ route('dashboard') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('dashboard') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }}">
                          Home
                      </a>
-                     <a href="#"
-                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-                         Search
+                     <a href="{{ route('manuals.index') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('manuals.index') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }} ">
+                         Manuals
                      </a>
-                     <a href="#"
-                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
+                     <a href="{{ route('manuals.create') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('manuals.create') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }}">
                          Upload Manual
                      </a>
-                     <a href="#"
-                         class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700">
-                         My Uploads
+                     <a href="{{ route('complaints.create') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('complaints.create') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }}">
+                         Upload Complaint
+                     </a>
+                     <a href="{{ route('manuals.indexv2') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('manuals.indexv2') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }}">
+                         My Manuals
+                     </a>
+                     <a href="{{ route('complaints.index') }}"
+                         class="inline-flex items-center px-1 pt-1 text-sm font-medium {{ request()->routeIs('complaints.index') ? 'text-indigo-600 border-b-2 border-indigo-500' : 'text-gray-500 border-b-2 border-transparent hover:border-gray-300 hover:text-gray-700' }}">
+                         My Complaints
                      </a>
                  </nav>
              </div>
