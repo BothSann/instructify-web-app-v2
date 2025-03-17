@@ -21,7 +21,7 @@ class CheckBanned
             Auth::logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
-            return redirect()->route('login')->with('error', 'Your account has been banned. Please contact support.');
+            return redirect()->route('login')->with('error', 'Your account has been banned. Please contact the administrator for more information.');
         }
 
         // For admin guard
