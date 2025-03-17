@@ -196,8 +196,6 @@ class AdminController extends Controller
             'g-recaptcha-response' => ['required', new RecaptchaRule()],
         ]);
 
-
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
