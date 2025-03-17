@@ -47,7 +47,7 @@ class StoreManualRequest extends FormRequest
                 // 'nullable',
                 'file', 
                 'mimes:pdf', // Restrict to PDF files
-                'max:10240' // Maximum file size (10MB)
+                'max:102400' // Maximum file size (10MB)
             ],
 
             // Optional additional metadata

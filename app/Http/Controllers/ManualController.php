@@ -17,13 +17,16 @@ class ManualController extends Controller
      */
     public function index()
     {
-        $manuals = Manual::with(['category', 'user'])
-        ->where('status', 'approved')
-        ->whereHas('user', function($query){
-            $query->where('is_banned', false);
-        })
-        ->orderBy('created_at', 'desc')
-        ->get();
+        $manuals = Manual::with(['category', 'user', 'admin'])
+            ->where('status', 'approved')
+            ->where(function($query) {
+                $query->whereHas('user', function($q) {
+                    $q->where('is_banned', false);
+                })
+                ->orWhereNotNull('uploaded_by_admin');
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
     
     // Add categories for the filter dropdown
         $categories = Category::all();
