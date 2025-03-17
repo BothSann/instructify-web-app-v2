@@ -11,7 +11,7 @@ class StoreComplaintRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,8 @@ class StoreComplaintRequest extends FormRequest
     {
         return [
             //
+            'complaint_type' => ['required', 'in:inaccurate,incomplete,outdated,inappropriate,other'],
+            'description' => ['required', 'string', 'min:10']
         ];
     }
 }

@@ -11,7 +11,7 @@ class StoreManualRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,40 @@ class StoreManualRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            // Manual Title (required, max length)
+            'manual_title' => [
+                'required', 
+                'string', 
+                'max:255'
+            ],
+
+            // Description (optional, max length)
+            'manual_description' => [
+                'nullable', 
+                'string', 
+                'max:1000'
+            ],
+
+            // Category validation based on the select options in the view
+            'category_id' => [
+                'required', 
+            ],
+
+            // File upload validation
+            'manual_file' => [
+                'required', 
+                // 'nullable',
+                'file', 
+                'mimes:pdf', // Restrict to PDF files
+                'max:10240' // Maximum file size (10MB)
+            ],
+
+            // Optional additional metadata
+            // 'model_number' => [
+            //     'nullable', 
+            //     'string', 
+            //     'max:100'
+            // ],
         ];
     }
 }
