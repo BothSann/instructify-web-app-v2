@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // })->middleware('custom.guest:web,admin');
 
-Route::get('/', [FrontendController::class,'index'])->name('homepage')->middleware('custom.guest:web,admin');
+Route::get('/', [FrontendController::class,'index'])->name('homepage')->middleware(['custom.guest:web,admin']);
 
 Route::get('/dashboard', [FrontendController::class,'index'])
-    ->middleware(['auth:web', 'verified'])->name('dashboard');
+    ->middleware(['auth:web', 'verified', 'check.banned'])->name('dashboard');
 
 Route::middleware(['auth:web', 'verified', 'check.banned'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
