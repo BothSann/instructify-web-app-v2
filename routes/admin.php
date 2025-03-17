@@ -56,4 +56,43 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
 
     Route::get('/dashboard', [AdminController::class, "index"])
         ->name('dashboard');
+
+    // Manual management
+    Route::get('/manuals', [AdminController::class, 'manuals'])->name('manuals.index');
+    Route::post('/manuals/{manual}/approve', [AdminController::class, 'approveManual'])->name('manuals.approve');
+    Route::post('/manuals/{manual}/reject', [AdminController::class, 'rejectManual'])->name('manuals.reject');
+    Route::get('/manuals/{manual}/download', [AdminController::class, 'downloadManual'])->name('manuals.download');
+    
+    
+// Complaint management
+    Route::get('/complaints', [AdminController::class, 'complaints'])->name('complaints.index');
+    Route::post('/complaints/{complaint}/resolve', [AdminController::class, 'resolveComplaint'])->name('complaints.resolve');
+    Route::post('/complaints/{complaint}/dismiss', [AdminController::class, 'dismissComplaint'])->name('complaints.dismiss');
+    
+    // User management
+    Route::get('/users', [AdminController::class, 'users'])->name('users.index');
+    Route::post('/users/{user}/ban', [AdminController::class, 'banUser'])->name(name: 'users.ban');
+    Route::post('/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('users.unban');
 });
+
+
+// Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin."],function () {
+//     // Existing routes...
+    
+//     // Manual management
+//     Route::get('/manuals', [AdminController::class, 'manuals'])->name('manuals.index');
+//     Route::put('/manuals/{manual}/status', [AdminController::class, 'updateManualStatus'])->name('manuals.update-status');
+
+//     // Option 1: Separate routes for approve and reject
+//     Route::post('/manuals/{manual}/approve', [AdminController::class, 'approveManual'])->name('manuals.approve');
+//     Route::post('/manuals/{manual}/reject', [AdminController::class, 'rejectManual'])->name('manuals.reject');
+    
+//     // Complaint management
+//     Route::get('/complaints', [AdminController::class, 'complaints'])->name('complaints.index');
+//     Route::put('/complaints/{complaint}/status', [AdminController::class, 'updateComplaintStatus'])->name('complaints.update-status');
+    
+//     // User management
+//     Route::get('/users', [AdminController::class, 'users'])->name('users.index');
+//     Route::put('/users/{user}/ban', [AdminController::class, 'banUser'])->name('users.ban');
+//     Route::put('/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('users.unban');
+// });
