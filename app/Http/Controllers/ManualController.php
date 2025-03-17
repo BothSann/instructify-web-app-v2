@@ -19,6 +19,9 @@ class ManualController extends Controller
     {
         $manuals = Manual::with(['category', 'user'])
         ->where('status', 'approved')
+        ->whereHas('user', function($query){
+            $query->where('is_banned', false);
+        })
         ->orderBy('created_at', 'desc')
         ->get();
     
@@ -118,6 +121,11 @@ class ManualController extends Controller
         
         // Apply status filter - only show approved manuals
         $query->where('status', 'approved');
+
+        // Filter out manuals from banned users
+        $query->whereHas('user', function($q) {
+            $q->where('is_banned', false);
+        });
         
         // Get results
         $manuals = $query->get();
@@ -129,6 +137,22 @@ class ManualController extends Controller
         $searchPerformed = !empty($search);
         
         return view('frontend.pages.manual.index', compact('manuals', 'categories', 'searchPerformed', 'search'));
+    }
+
+    /**
+    * Download the specified manual file.
+    */
+
+    public function download(Manual $manual) {
+        $filePath = public_path($manual->file_path);
+
+        if(!file_exists($filePath)) {
+            abort(404);
+        }
+
+        $fileName = "{$manual->title}.pdf";
+        
+        return response()->download($filePath, $fileName);
     }
 
 
@@ -164,19 +188,4 @@ class ManualController extends Controller
         //
     }
 
-    /**
-     * Download the specified manual file.
-     */
-
-    public function download(Manual $manual) {
-        $filePath = public_path($manual->file_path);
-
-        if(!file_exists($filePath)) {
-            abort(404);
-        }
-
-        $fileName = "{$manual->title}.pdf";
-        
-        return response()->download($filePath, $fileName);
-    }
 }
