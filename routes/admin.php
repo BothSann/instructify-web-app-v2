@@ -59,6 +59,8 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
 
     // Manual management
     Route::get('/manuals', [AdminController::class, 'manuals'])->name('manuals.index');
+    Route::get('/manuals/create', [AdminController::class, 'createManual'])->name('manuals.create');
+    Route::post('/manuals/store', [AdminController::class, 'storeManual'])->name('manuals.store');
     Route::post('/manuals/{manual}/approve', [AdminController::class, 'approveManual'])->name('manuals.approve');
     Route::post('/manuals/{manual}/reject', [AdminController::class, 'rejectManual'])->name('manuals.reject');
     Route::get('/manuals/{manual}/download', [AdminController::class, 'downloadManual'])->name('manuals.download');
