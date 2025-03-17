@@ -25,7 +25,16 @@
                         {{ $manual->title }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-500">
-                        Uploaded by: {{ $manual->user->name }} • {{ $manual->created_at->format('M d, Y') }}
+                        Uploaded by:
+                        @if ($manual->uploaded_by_admin)
+                            {{ $manual->admin->name }} <span
+                                class="px-1 text-xs font-medium rounded bg-amber-100 text-amber-800">Admin</span>
+                        @elseif ($manual->uploaded_by)
+                            {{ $manual->user->name }}
+                        @else
+                            Unknown
+                        @endif
+                        • {{ $manual->created_at->format('M d, Y') }}
                     </p>
                     <div class="flex mt-2">
                         <span

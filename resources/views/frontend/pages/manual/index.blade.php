@@ -125,8 +125,16 @@
                                             <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
                                                 <i class="mr-1 fas fa-file"></i>{{ $manual->file_size }} MB
                                             </div>
-                                            <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 fa-solid fa-user-tie"></i>{{ $manual->user->name }}
+                                            <div class="flex items-center gap-1 mb-1 mr-2 text-xs text-gray-500">
+                                                <i class="fa-solid fa-user-tie"></i>
+                                                @if ($manual->uploaded_by_admin)
+                                                    {{ $manual->admin->name }} <span
+                                                        class="px-1 ml-2 font-medium text-green-800 bg-green-100 rounded text-xxs">Admin</span>
+                                                @elseif ($manual->uploaded_by)
+                                                    {{ $manual->user->name }}
+                                                @else
+                                                    Unknown
+                                                @endif
                                             </div>
                                         </div>
                                     </div>

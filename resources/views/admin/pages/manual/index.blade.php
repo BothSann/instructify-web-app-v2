@@ -29,10 +29,10 @@
                         class="py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
                     <i class="absolute text-gray-400 fas fa-search left-3 top-3"></i>
                 </div>
-                <button
+                <a href="{{ route('admin.manuals.create') }}" title="Add Manual"
                     class="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <i class="mr-2 fas fa-plus"></i> Add Manual
-                </button>
+                </a>
             </div>
         </div>
 
@@ -123,9 +123,22 @@
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm text-gray-900">{{ $manual->user->name }}</div>
+                                <div class="text-sm text-gray-900">
+                                    @if ($manual->uploaded_by_admin)
+                                        {{ $manual->admin->name }} <span
+                                            class="text-xs font-medium bg-blue-100 text-blue-800 px-2 py-0.5 rounded">Admin</span>
+                                    @elseif ($manual->uploaded_by)
+                                        {{ $manual->user->name }}
+                                    @else
+                                        <span class="text-gray-500">Unknown</span>
+                                    @endif
+                                </div>
                                 <div class="text-xs text-gray-500">
-                                    {{ $manual->user->email }}
+                                    @if ($manual->uploaded_by_admin)
+                                        {{ $manual->admin->email }}
+                                    @elseif ($manual->uploaded_by)
+                                        {{ $manual->user->email }}
+                                    @endif
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

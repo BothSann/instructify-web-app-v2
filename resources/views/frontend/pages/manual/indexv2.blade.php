@@ -96,8 +96,8 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div
-                                            class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-100 rounded-md">
-                                            <i class="text-blue-500 fas fa-file-pdf"></i>
+                                            class="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md bg-violet-100">
+                                            <i class="text-violet-500 fas fa-file-pdf"></i>
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">

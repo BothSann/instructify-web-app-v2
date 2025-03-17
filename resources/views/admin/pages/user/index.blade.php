@@ -23,10 +23,10 @@
                         class="py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
                     <i class="absolute text-gray-400 fas fa-search left-3 top-3"></i>
                 </div>
-                <button
+                <a href="{{ route('admin.users.create') }}" title="Add User"
                     class="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <i class="mr-2 fas fa-plus"></i> Add User
-                </button>
+                </a>
             </div>
         </div>
 
@@ -120,7 +120,7 @@
                                 {{ $user->created_at->format('M d, Y') }}
                             </td>
                             <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                                <div class="flex space-x-2">
+                                <div class="flex gap-6">
                                     <form action="{{ route('admin.users.ban', $user->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" title="Ban User"
@@ -137,11 +137,6 @@
                                         <button type="submit" title="Unban User"
                                             class=" {{ $user->is_banned == 1 ? ' text-red-600 hover:text-red-900 ' : 'text-green-600 hover:text-green-900' }}">
                                             <i class="fa-solid fa-lock-open"></i>
-                                        </button>
-                                    </form>
-                                    <form action="">
-                                        <button class="text-red-600 hover:text-red-900">
-                                            <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
                                 </div>

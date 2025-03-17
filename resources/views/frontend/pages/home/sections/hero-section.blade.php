@@ -5,7 +5,7 @@
             <h1 class="text-4xl font-extrabold text-white sm:text-5xl sm:tracking-tight lg:text-6xl">
                 Find Any Manual
             </h1>
-            <p class="max-w-2xl mx-auto mt-6 text-xl text-indigo-200">
+            <p class="max-w-xl mx-auto mt-6 text-xl text-indigo-200">
                 Search our library of product manuals to find instructions for
                 your devices.
             </p>
