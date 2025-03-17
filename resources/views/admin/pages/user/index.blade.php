@@ -120,7 +120,7 @@
                                 {{ $user->created_at->format('M d, Y') }}
                             </td>
                             <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                                <div class="flex gap-6">
+                                <div class="flex gap-2">
                                     <form action="{{ route('admin.users.ban', $user->id) }}" method="POST">
                                         @csrf
                                         <button type="submit" title="Ban User"
@@ -139,109 +139,18 @@
                                             <i class="fa-solid fa-lock-open"></i>
                                         </button>
                                     </form>
+                                    <form action="{{ route('admin.users.delete', $user->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure you want to delete this user? This action cannot be undone.');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Delete User" class="text-red-600 hover:text-red-900">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
-
-
-                    {{-- <!-- User Row 2 -->
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <input type="checkbox"
-                                    class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
-                                <div
-                                    class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-200 rounded-full">
-                                    <i class="text-gray-500 fas fa-user"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Jane Smith
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">
-                                jane.smith@example.com
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">8</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="inline-flex px-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full">
-                                Active
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            Feb 3, 2023
-                        </td>
-                        <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                            <div class="flex space-x-2">
-                                <button class="text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-red-600 hover:text-red-900">
-                                    <i class="fas fa-ban"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-gray-900">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
-                    <!-- User Row 3 (Banned) -->
-                    <tr class="bg-red-50">
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="flex items-center">
-                                <input type="checkbox"
-                                    class="w-4 h-4 mr-3 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" />
-                                <div
-                                    class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-gray-200 rounded-full">
-                                    <i class="text-gray-500 fas fa-user"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <div class="text-sm font-medium text-gray-900">
-                                        Robert Johnson
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-500">
-                                robert.j@example.com
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <div class="text-sm text-gray-900">3</div>
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <span
-                                class="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full">
-                                Banned
-                            </span>
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                            Mar 12, 2023
-                        </td>
-                        <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                            <div class="flex space-x-2">
-                                <button class="text-indigo-600 hover:text-indigo-900">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="text-green-600 hover:text-green-900">
-                                    <i class="fas fa-check-circle"></i>
-                                </button>
-                                <button class="text-gray-600 hover:text-gray-900">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr> --}}
                 </tbody>
             </table>
 
@@ -262,8 +171,8 @@
                         <div>
                             <p class="text-sm text-gray-700">
                                 Showing <span class="font-medium">1</span> to
-                                <span class="font-medium">10</span> of
-                                <span class="font-medium">1,342</span> users
+                                <span class="font-medium">{{ $totalUsers }}</span> of
+                                <span class="font-medium">{{ $totalUsers }}</span> users
                             </p>
                         </div>
                         <div>
