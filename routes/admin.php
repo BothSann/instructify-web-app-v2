@@ -71,6 +71,8 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
     
     // User management
     Route::get('/users', [AdminController::class, 'users'])->name('users.index');
+    Route::get('/users/create', [AdminController::class, 'createUser'])->name('users.create');
+    Route::post('/users/store', [AdminController::class, 'storeUser'])->name('users.store');
     Route::post('/users/{user}/ban', [AdminController::class, 'banUser'])->name(name: 'users.ban');
     Route::post('/users/{user}/unban', [AdminController::class, 'unbanUser'])->name('users.unban');
 });

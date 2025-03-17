@@ -9,6 +9,16 @@ use App\Models\Complaint;
 use App\Models\Manual;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Rules\RecaptchaRule;
+use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+
+
+
+
+
 
 class AdminController extends Controller
 {
@@ -173,4 +183,30 @@ class AdminController extends Controller
         return redirect()->back()->with('success','User unbanned successfully.');
     }
 
+    public function createUser () {
+        return view('admin.pages.user.create');
+    }
+
+    public function storeUser (Request $request) {
+        
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'g-recaptcha-response' => ['required', new RecaptchaRule()],
+        ]);
+
+
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+
+        return redirect()->route('admin.users.index')
+        ->with('success', 'User created successfully.');
+    }
 }
