@@ -13,5 +13,6 @@ class ComplaintSeeder extends Seeder
     public function run(): void
     {
         //
+
     }
 }
