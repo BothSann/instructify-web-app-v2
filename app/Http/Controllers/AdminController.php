@@ -160,7 +160,8 @@ class AdminController extends Controller
 
     public function users() {
         $users = User::all();
-        return view('admin.pages.user.index', compact('users'));
+        $totalUsers = User::count(); 
+        return view('admin.pages.user.index', compact('users', 'totalUsers'));
     }
 
     public function banUser (User $user) {
@@ -210,6 +211,14 @@ class AdminController extends Controller
         ->with('success', 'User created successfully.');
     }
 
+    public function deleteUser(User $user) {
+        // Delete the user
+        $user->delete();
+        
+        return redirect()->route('admin.users.index')
+            ->with('success', 'User deleted successfully.');
+    }
+
     public function createManual()
     {
         $categories = Category::all();
@@ -218,8 +227,6 @@ class AdminController extends Controller
     
     public function storeManual(StoreManualRequest $request)
     {
-        
-    
         // Create new manual instance
         $manual = new Manual();
         $manual->title = $request->manual_title;
