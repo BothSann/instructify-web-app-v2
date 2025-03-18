@@ -96,7 +96,7 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Pending Manual Row -->
+                    <!-- Manual Row -->
                     @foreach ($manuals as $manual)
                         <tr
                             class="
@@ -162,10 +162,10 @@
                             </td>
                             <!-- OR for Option 2: Single form with different buttons -->
                             <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
-                                <div class="flex space-x-2">
+                                <div class="flex gap-2">
                                     <!-- Downlaod button -->
                                     <a href="{{ route('admin.manuals.download', $manual) }}"
-                                        class="text-indigo-600 hover:text-indigo-900" title="View">
+                                        class="inline text-indigo-600 hover:text-indigo-900" title="View">
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <!-- Approve button -->
