@@ -5,8 +5,8 @@
     </button>
     <div class="flex items-center gap-4 mr-6">
         <span class="text-gray-700 ">{{ Auth::user()->name }}</span>
-        <div class="flex items-center justify-center w-10 h-10 bg-indigo-200 rounded-full">
-            <i class="text-indigo-600 fas fa-user"></i>
+        <div class="flex items-center justify-center w-10 h-10 bg-yellow-200 rounded-full">
+            <i class="text-xl text-yellow-600 fa-solid fa-user-tie"></i>
         </div>
     </div>
 </header>
