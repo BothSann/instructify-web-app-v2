@@ -119,17 +119,17 @@
                                                 {{ $manual->category->name }}
                                             </span>
                                             <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 fas fa-calendar"></i>
+                                                <i class="mr-1 text-yellow-400 fas fa-calendar"></i>
                                                 {{ $manual->created_at->format('M d, Y') }}
                                             </div>
                                             <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 fas fa-file"></i>{{ $manual->file_size }} MB
+                                                <i class="mr-1 text-blue-400 fas fa-file"></i>{{ $manual->file_size }} MB
                                             </div>
                                             <div class="flex items-center gap-1 mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="fa-solid fa-user-tie"></i>
+                                                <i class="text-teal-400 fa-solid fa-user-tie"></i>
                                                 @if ($manual->uploaded_by_admin)
                                                     {{ $manual->admin->name }} <span
-                                                        class="px-1 ml-2 font-medium text-green-800 bg-green-100 rounded text-xxs">Admin</span>
+                                                        class="px-2 py-1 ml-2 font-medium text-green-800 bg-green-100 rounded text-xxs">Admin</span>
                                                 @elseif ($manual->uploaded_by)
                                                     {{ $manual->user->name }}
                                                 @else
