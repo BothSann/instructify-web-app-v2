@@ -18,14 +18,25 @@
                 Users Management
             </h2>
             <div class="flex space-x-2">
-                <form action="{{ route('admin.users.index') }}" method="GET" class="relative">
-                    <input type="text" name="search" placeholder="Search users..." value="{{ request('search') }}"
-                        class="py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
-                    <i class="absolute text-gray-400 fas fa-search left-3 top-3"></i>
-                    <button type="submit" class="hidden">Search</button>
+                <form action="{{ route('admin.users.index') }}" method="GET" class="flex items-center">
+                    <div class="relative">
+                        <input type="text" name="search" placeholder="Search users..." value="{{ request('search') }}"
+                            class="py-2 pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" />
+                        <i class="absolute text-gray-400 fas fa-search left-3 top-3"></i>
+                    </div>
+                    <button type="submit"
+                        class="px-3 py-2 ml-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                        Search
+                    </button>
+                    @if (request('search'))
+                        <a href="{{ route('admin.users.index', request()->except('search')) }}"
+                            class="px-3 py-2 ml-2 text-white bg-red-600 rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            Clear
+                        </a>
+                    @endif
                 </form>
                 <a href="{{ route('admin.users.create') }}" title="Add User"
-                    class="px-4 py-2 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    class="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                     <i class="mr-2 fas fa-plus"></i> Add User
                 </a>
             </div>
