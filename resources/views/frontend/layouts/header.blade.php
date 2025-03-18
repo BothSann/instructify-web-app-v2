@@ -37,7 +37,7 @@
              <div class="hidden sm:ml-6 sm:flex sm:items-center">
                  <div class="relative ml-3">
                      <div class="flex items-center gap-2">
-                         <span class="mr-2 text-sm text-gray-500">
+                         <span class="mr-1 text-xs text-gray-500 ">
                              @auth
                                  {{ Auth::user()->name }}
                              @else
@@ -46,15 +46,15 @@
                          </span>
                          <button
                              class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                             <div class="flex items-center justify-center w-10 h-10 bg-indigo-100 rounded-full">
+                             <div class="flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full">
                                  @if (Route::has('login'))
                                      @auth
                                          <a href="{{ route('profile.edit') }}">
-                                             <i class="text-xl text-indigo-600 fas fa-user"></i>
+                                             <i class="text-sm text-indigo-600 fas fa-user"></i>
                                          </a>
                                      @else
                                          <a href="{{ route('register') }}">
-                                             <i class="text-xl text-indigo-600 fas fa-user"></i>
+                                             <i class="text-sm text-indigo-600 fas fa-user"></i>
                                          </a>
                                      @endauth
                                  @endif
@@ -64,9 +64,9 @@
                              <form action="{{ route('logout') }}" method="POST">
                                  @csrf
                                  <button type="submit"
-                                     class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"">
+                                     class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                                      <div class="flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full">
-                                         <i class="text-indigo-600 fas fa-sign-out-alt"></i>
+                                         <i class="text-sm text-indigo-600 fas fa-sign-out-alt"></i>
                                      </div>
                                  </button>
                              </form>
