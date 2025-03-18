@@ -78,7 +78,7 @@ class ManualController extends Controller
             $manual->save();
         }
 
-        return redirect()->route("manuals.indexV2")->with("success", "Manual uploaded successfully! Waiting for admin approval.");
+        return redirect()->route("manuals.indexv2")->with("success", "Manual uploaded successfully! Waiting for admin approval.");
     }
 
 
