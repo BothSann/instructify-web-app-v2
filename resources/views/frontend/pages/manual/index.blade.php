@@ -116,7 +116,7 @@
                                         </p>
                                         <div class="flex flex-wrap items-center gap-2 mt-2">
                                             <span
-                                                class="px-2 py-1 mb-1 mr-2 text-xs font-medium text-blue-800 bg-blue-100 rounded-full">
+                                                class="px-2 py-1 mb-1 mr-2 text-xs font-medium rounded-full text-violet-800 bg-violet-100">
                                                 {{ $manual->category->name }}
                                             </span>
                                             <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
@@ -124,7 +124,7 @@
                                                 {{ $manual->created_at->format('M d, Y') }}
                                             </div>
                                             <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 text-blue-400 fas fa-file"></i>{{ $manual->file_size }} MB
+                                                <i class="mr-1 text-rose-400 fas fa-file"></i>{{ $manual->file_size }} MB
                                             </div>
                                             <div class="flex items-center gap-1 mb-1 mr-2 text-xs text-gray-500">
                                                 <i class="text-teal-400 fa-solid fa-user-tie"></i>
