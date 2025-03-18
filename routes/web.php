@@ -15,6 +15,8 @@ Route::get('/', [FrontendController::class,'index'])->name('homepage')->middlewa
 Route::get('/dashboard', [FrontendController::class,'index'])
     ->middleware(['auth:web', 'verified', 'check.banned'])->name('dashboard');
 
+Route::get('manuals', [ManualController::class, 'index'])->name('manuals.index');
+
 Route::middleware(['auth:web', 'verified', 'check.banned'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -25,7 +27,7 @@ Route::middleware(['auth:web', 'verified', 'check.banned'])->group(function () {
     Route::get('manuals/mymanuals', [ManualController::class, 'indexV2'])->name('manuals.indexv2');
     Route::get('/manuals/{manual}/download', [ManualController::class, 'download'])->name('manuals.download');
     Route::get('/manuals/search', [ManualController::class, 'search'])->name('manuals.search');
-    Route::resource('manuals', ManualController::class);
+    Route::resource('manuals', ManualController::class)->except('index');
 
     // Complaint Route
     Route::resource('complaints', ComplaintController::class)->middleware('auth:web');
