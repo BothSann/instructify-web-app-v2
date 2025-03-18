@@ -91,7 +91,7 @@
                                 <div>
                                     <div class="flex items-center">
                                         <span
-                                            class="px-2 py-1 mr-2 text-xs font-semibold text-red-800 bg-red-100 rounded-full">
+                                            class="px-2 py-1 mr-2 text-xs font-semibold rounded-full text-violet-800 bg-violet-100">
                                             {{ $complaint->getComplaintTypeName() }}
                                         </span>
                                         <span
@@ -119,13 +119,13 @@
                                 <div class="flex space-x-2">
                                     <button class="text-indigo-600 hover:text-indigo-900" title="Download Manual">
                                         <a href="{{ route('admin.manuals.download', $complaint->manual) }}">
-                                            <i class="fas fa-file-pdf"></i>
+                                            <i class="text-2xl fas fa-file-pdf"></i>
                                         </a>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="p-5 bg-gray-50">
+                        <div class="h-full p-5 bg-gray-50">
                             <p class="mb-1 text-sm font-medium text-gray-700">
                                 Complaint Description:
                             </p>
