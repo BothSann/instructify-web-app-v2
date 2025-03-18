@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Rules\RecaptchaRule;
+use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
@@ -96,7 +97,8 @@ class AdminController extends Controller
         return view("admin.pages.manual.index", compact("manuals", "statuses"));
     }
 
-    public function downloadManual(Manual $manual) {
+    public function downloadManual(Manual $manual) 
+    {
         $filePath = public_path($manual->file_path);
     
         if(!file_exists($filePath)) {
@@ -108,7 +110,8 @@ class AdminController extends Controller
         return response()->download($filePath, $fileName);
     }
 
-    public function approveManual(Manual $manual) {
+    public function approveManual(Manual $manual) 
+    {
 
         // Check if the manual is already approved
         if ($manual->status == 'approved') {
@@ -120,7 +123,8 @@ class AdminController extends Controller
         return back()->with("success","Manual approved successfully.");
     }
 
-    public function rejectManual (Manual $manual) {
+    public function rejectManual (Manual $manual) 
+    {
 
         // Check if the manual is already rejected
         if ($manual->status == "rejected") {
@@ -132,7 +136,19 @@ class AdminController extends Controller
         return back()->with("success","Manual rejected successfully.");
     }
 
-    public function complaints() {
+    public function destroyManual (Manual $manual) 
+    {
+        if($manual->file_path && File::exists(public_path($manual->file_path))) {
+            File::delete(public_path($manual->file_path));
+        }
+
+        $manual->delete();
+    
+        return back()->with("success", "Manual deleted successfully.");
+    }
+
+    public function complaints() 
+    {
         $complaints = Complaint::with('manual', 'user')->get();
         $statuses = Complaint::$statuses;
         $admin = Auth::user();
@@ -140,7 +156,8 @@ class AdminController extends Controller
         return view('admin/pages/complaint/index', compact('complaints','statuses', 'admin'));
     }
 
-    public function resolveComplaint (Complaint $complaint) {
+    public function resolveComplaint (Complaint $complaint) 
+    {
         // Check if the complaint is already dismissed
         if ($complaint->status == 'dismissed') {
             return redirect()->back()->with('error','Complaint has already been dismissed.');
@@ -158,13 +175,15 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Complaint has been dismissed');
     }
 
-    public function users() {
+    public function users() 
+    {
         $users = User::all();
         $totalUsers = User::count(); 
         return view('admin.pages.user.index', compact('users', 'totalUsers'));
     }
 
-    public function banUser (User $user) {
+    public function banUser (User $user) 
+    {
         // Check if the user is already banned
         if ($user->is_banned) {
             return redirect()->back()->with('error','User is already banned.');
@@ -176,7 +195,8 @@ class AdminController extends Controller
         return redirect()->back()->with('success','User banned successfully.');
     }
 
-    public function unbanUser (User $user) {
+    public function unbanUser (User $user) 
+    {
         if (!$user->is_banned) {
             return redirect()->back()->with('error','User is already unbanned.');
         }
@@ -186,11 +206,13 @@ class AdminController extends Controller
         return redirect()->back()->with('success','User unbanned successfully.');
     }
 
-    public function createUser () {
+    public function createUser () 
+    {
         return view('admin.pages.user.create');
     }
 
-    public function storeUser (Request $request) {
+    public function storeUser (Request $request) 
+    {
         
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
@@ -211,7 +233,8 @@ class AdminController extends Controller
         ->with('success', 'User created successfully.');
     }
 
-    public function deleteUser(User $user) {
+    public function deleteUser(User $user) 
+    {
         // Delete the user
         $user->delete();
         

@@ -163,11 +163,12 @@
                             <!-- OR for Option 2: Single form with different buttons -->
                             <td class="px-6 py-4 text-sm font-medium whitespace-nowrap">
                                 <div class="flex space-x-2">
+                                    <!-- Downlaod button -->
                                     <a href="{{ route('admin.manuals.download', $manual) }}"
                                         class="text-indigo-600 hover:text-indigo-900" title="View">
                                         <i class="fas fa-eye"></i>
                                     </a>
-
+                                    <!-- Approve button -->
                                     <form action="{{ route('admin.manuals.approve', $manual->id) }}" method="POST"
                                         class="inline">
                                         @csrf
@@ -175,7 +176,6 @@
                                             <i class="fas fa-check"></i>
                                         </button>
                                     </form>
-
                                     <!-- Reject button -->
                                     <form action="{{ route('admin.manuals.reject', $manual->id) }}" method="POST"
                                         class="inline">
@@ -184,10 +184,19 @@
                                             <i class="fas fa-times"></i>
                                         </button>
                                     </form>
+                                    <!-- Reject button -->
+                                    <form action="{{ route('admin.manuals.destroy', $manual->id) }}" method="POST"
+                                        class="inline"
+                                        onsubmit="return confirm('Are you sure you want to delete this manual? This action cannot be undone.');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-500 hover:text-red-900"
+                                            title="Delete Manual">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
                                 </div>
                             </td>
-
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -215,7 +224,8 @@
                             </p>
                         </div>
                         <div>
-                            <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                            <nav class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
+                                aria-label="Pagination">
                                 <a href="#"
                                     class="relative inline-flex items-center px-2 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50">
                                     <span class="sr-only">Previous</span>

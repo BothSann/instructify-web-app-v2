@@ -64,6 +64,7 @@ Route::group(["middleware" => ["auth:admin"], "prefix"=> "admin", "as"=> "admin.
     Route::post('/manuals/{manual}/approve', [AdminController::class, 'approveManual'])->name('manuals.approve');
     Route::post('/manuals/{manual}/reject', [AdminController::class, 'rejectManual'])->name('manuals.reject');
     Route::get('/manuals/{manual}/download', [AdminController::class, 'downloadManual'])->name('manuals.download');
+    Route::delete('/manuals/{manual}/delete', [AdminController::class, 'destroyManual'])->name('manuals.destroy');
     
     
 // Complaint management
