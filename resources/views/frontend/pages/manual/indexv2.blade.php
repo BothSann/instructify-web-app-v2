@@ -87,17 +87,37 @@
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Status
                             </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Download
+                            </th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         <!-- Manual Item 1 -->
                         @foreach ($manuals as $manual)
-                            <tr>
+                            @php
+                                // Base and hover background classes by status
+                                [$rowBgClass, $rowHoverClass] = match ($manual->status) {
+                                    'pending' => ['bg-amber-100', 'hover:bg-gray-50'],
+                                    'approved' => ['bg-green-100', 'hover:bg-gray-50'],
+                                    'rejected' => ['bg-red-100', 'hover:bg-gray-50'],
+                                    default => ['', 'hover:bg-gray-100'],
+                                };
+
+                                $statusClasses = match ($manual->status) {
+                                    'pending' => 'text-amber-800 bg-amber-200 border border-amber-200',
+                                    'approved' => 'text-green-800 bg-green-200 border border-green-200',
+                                    'rejected' => 'text-red-800 bg-red-200 border border-red-200',
+                                    default => 'text-gray-800 bg-gray-200 border border-gray-200',
+                                };
+                            @endphp
+                            <tr class="{{ $rowBgClass }} {{ $rowHoverClass }} transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
                                         <div
-                                            class="flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-md bg-violet-100">
-                                            <i class="text-violet-500 fas fa-file-pdf"></i>
+                                            class="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-indigo-100 rounded-md">
+                                            <i class="text-indigo-500 fas fa-file-pdf"></i>
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -110,21 +130,29 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $manual->category->name }}</div>
+                                    <span
+                                        class="inline-flex px-2.5 py-1 text-xs font-medium rounded-full text-violet-700 bg-violet-100">
+                                        {{ $manual->category->name }}
+                                    </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">
-                                        {{ $manual->created_at->format('M d, Y') }}</div>
+                                    <div class="flex items-center text-sm text-gray-500">
+                                        {{ $manual->created_at->format('M d, Y') }}
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
-                                            {{ $manual->status == 'pending' ? 'text-yellow-800 bg-yellow-200' : '' }}
-                                            {{ $manual->status == 'approved' ? 'text-green-800 bg-green-200' : '' }}
-                                            {{ $manual->status == 'rejected' ? 'text-red-800 bg-red-200' : '' }}
-                                        ">
+                                        class="inline-flex px-2.5 py-1 text-xs font-medium rounded-full {{ $statusClasses }}">
                                         {{ $statuses[$manual->status] ?? 'Unknown' }}
                                     </span>
+                                </td>
+                                <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                                    <div class="flex justify-start space-x-2">
+                                        <a href="{{ route('manuals.download', $manual) }}"
+                                            class="text-green-600 hover:text-green-900" title="Download">
+                                            <i class="ml-8 fas fa-download"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

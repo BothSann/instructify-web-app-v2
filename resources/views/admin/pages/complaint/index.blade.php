@@ -76,16 +76,30 @@
         <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
             @if ($complaints->count() > 0)
                 @foreach ($complaints as $complaint)
-                    <div
-                        class="overflow-hidden bg-white rounded-lg shadow-md
-                        {{ $complaint->getComplaintStatusKey() == 'pending'
-                            ? 'border-l-4 border-yellow-500'
-                            : ($complaint->getComplaintStatusKey() == 'resolved'
-                                ? 'border-l-4 border-green-500'
-                                : ($complaint->getComplaintStatusKey() == 'dismissed'
-                                    ? 'border-l-4 border-red-500'
-                                    : '')) }}
-                    ">
+                    @php
+                        $statusKey = $complaint->getComplaintStatusKey();
+
+                        // Border color classes
+                        $borderClass = '';
+                        if ($statusKey == 'pending') {
+                            $borderClass = 'border-l-4 border-yellow-500';
+                        } elseif ($statusKey == 'resolved') {
+                            $borderClass = 'border-l-4 border-green-500';
+                        } elseif ($statusKey == 'dismissed') {
+                            $borderClass = 'border-l-4 border-red-500';
+                        }
+
+                        // Status badge classes
+                        $statusBadgeClass = '';
+                        if ($statusKey == 'pending') {
+                            $statusBadgeClass = 'text-yellow-800 bg-yellow-100';
+                        } elseif ($statusKey == 'resolved') {
+                            $statusBadgeClass = 'text-green-800 bg-green-100';
+                        } elseif ($statusKey == 'dismissed') {
+                            $statusBadgeClass = 'text-red-800 bg-red-100';
+                        }
+                    @endphp
+                    <div class="overflow-hidden bg-white rounded-lg shadow-md {{ $borderClass }}">
                         <div class="p-5 border-b border-gray-200">
                             <div class="flex items-start justify-between">
                                 <div>
@@ -94,16 +108,7 @@
                                             class="px-2 py-1 mr-2 text-xs font-semibold rounded-full text-violet-800 bg-violet-100">
                                             {{ $complaint->getComplaintTypeName() }}
                                         </span>
-                                        <span
-                                            class="px-2 py-1 text-xs font-semibold rounded-full 
-                                            {{ $complaint->getComplaintStatusKey() == 'pending'
-                                                ? 'text-yellow-800 bg-yellow-100'
-                                                : ($complaint->getComplaintStatusKey() == 'resolved'
-                                                    ? 'text-green-800 bg-green-100'
-                                                    : ($complaint->getComplaintStatusKey() == 'dismissed'
-                                                        ? 'text-red-800 bg-red-100'
-                                                        : '')) }}
-                                        ">
+                                        <span class="px-2 py-1 text-xs font-semibold rounded-full {{ $statusBadgeClass }}">
                                             {{ $complaint->getComplaintStatusName() }}
                                         </span>
                                     </div>
@@ -133,7 +138,7 @@
                                 {{ $complaint->description }}
                             </p>
 
-                            @if ($complaint->getComplaintStatusKey() == 'resolved')
+                            @if ($statusKey == 'resolved')
                                 <div class="flex items-center mb-3 text-sm text-green-600">
                                     <i class="mr-2 fas fa-check-circle"></i>
                                     <span>Resolved by Admin ({{ $admin->name }}) on
@@ -144,7 +149,7 @@
 
                             <div class="flex justify-between">
                                 <div class="flex space-x-2">
-                                    @if ($complaint->getComplaintStatusKey() == 'resolved')
+                                    @if ($statusKey == 'resolved')
                                         {{-- Show non-clickable "Resolved" indicator --}}
                                         <div class="px-3 py-1 text-xs text-white bg-green-600 rounded-md">
                                             Resolved
@@ -163,12 +168,12 @@
                                 </div>
 
                                 <div>
-                                    @if ($complaint->getComplaintStatusKey() == 'dismissed')
+                                    @if ($statusKey == 'dismissed')
                                         {{-- Show non-clickable "Dismissed" indicator --}}
                                         <div class="px-3 py-1 text-xs text-white bg-red-600 rounded-md">
                                             Dismissed
                                         </div>
-                                    @elseif ($complaint->getComplaintStatusKey() != 'resolved')
+                                    @elseif ($statusKey != 'resolved')
                                         {{-- Show "Dismiss Complaint" button only for non-resolved complaints --}}
                                         <form action="{{ route('admin.complaints.dismiss', $complaint->id) }}"
                                             method="POST">

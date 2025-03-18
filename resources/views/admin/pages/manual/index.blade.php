@@ -122,12 +122,26 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <!-- Manual Row -->
                         @foreach ($manuals as $manual)
-                            <tr
-                                class="
-                                  {{ $manual->status == 'pending' ? 'text-yellow-800 bg-yellow-100' : '' }}
-                                  {{ $manual->status == 'approved' ? 'text-green-800 bg-green-100' : '' }}
-                                  {{ $manual->status == 'rejected' ? 'text-red-800 bg-red-100' : '' }}
-                                  ">
+                            @php
+                                $rowClass = '';
+                                if ($manual->status == 'pending') {
+                                    $rowClass = 'text-yellow-800 bg-yellow-100';
+                                } elseif ($manual->status == 'approved') {
+                                    $rowClass = 'text-green-800 bg-green-100';
+                                } elseif ($manual->status == 'rejected') {
+                                    $rowClass = 'text-red-800 bg-red-100';
+                                }
+
+                                $statusClass = '';
+                                if ($manual->status == 'pending') {
+                                    $statusClass = 'text-yellow-800 bg-yellow-200';
+                                } elseif ($manual->status == 'approved') {
+                                    $statusClass = 'text-green-800 bg-green-200';
+                                } elseif ($manual->status == 'rejected') {
+                                    $statusClass = 'text-red-800 bg-red-200';
+                                }
+                            @endphp
+                            <tr class="{{ $rowClass }}">
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         <input type="checkbox"
@@ -173,11 +187,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full
-                                          {{ $manual->status == 'pending' ? 'text-yellow-800 bg-yellow-200' : '' }}
-                                          {{ $manual->status == 'approved' ? 'text-green-800 bg-green-200' : '' }}
-                                          {{ $manual->status == 'rejected' ? 'text-red-800 bg-red-200' : '' }}
-                                      ">
+                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full {{ $statusClass }}">
                                         {{ $statuses[$manual->status] ?? 'Unknown' }}
                                     </span>
                                 </td>

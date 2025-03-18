@@ -84,53 +84,55 @@
                     @if ($manuals->count() > 0)
                         @foreach ($manuals as $manual)
                             <li
-                                class="px-4 py-4 transition-colors border border-gray-200 rounded-lg sm:px-6 hover:bg-gray-50 hover:border-indigo-300 ">
+                                class="px-4 py-4 transition-all duration-200 border border-gray-200 rounded-lg sm:px-6 hover:bg-gray-50 hover:border-indigo-400 hover:shadow-md">
                                 <div class="flex items-start">
                                     <div
-                                        class="flex items-center justify-center flex-shrink-0 w-12 h-12 bg-blue-100 rounded">
-                                        <i class="text-xl text-blue-500 fas fa-file-pdf"></i>
+                                        class="flex items-center justify-center flex-shrink-0 w-12 h-12 rounded-lg bg-indigo-50">
+                                        <i class="text-xl text-indigo-500 fas fa-file-pdf"></i>
                                     </div>
                                     <div class="flex-1 ml-4">
                                         <div class="flex justify-between">
                                             <h3 class="text-base font-medium text-gray-900 hover:text-indigo-600">
-                                                <a
-                                                    href="{{ route('manuals.download', $manual) }}">{{ $manual->title }}</a>
+                                                <a href="{{ route('manuals.download', $manual) }}"
+                                                    class="hover:underline">{{ $manual->title }}</a>
                                             </h3>
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('manuals.download', $manual) }}"
-                                                    class="text-green-600 hover:text-green-900" title="Download">
+                                                    class="flex items-center justify-center w-8 h-8 text-green-600 transition-colors rounded-full hover:bg-green-50 hover:text-green-700"
+                                                    title="Download">
                                                     <i class="text-lg fas fa-download"></i>
                                                 </a>
                                                 <a href="{{ route('complaints.create', ['manual_id' => $manual->id]) }}"
+                                                    class="flex items-center justify-center w-8 h-8 transition-colors rounded-full hover:bg-amber-50 hover:text-amber-700"
                                                     title="Submit Complaint">
-                                                    <i
-                                                        class="text-lg text-yellow-300 fa-solid fa-triangle-exclamation hover:text-yellow-600"></i>
+                                                    <i class="text-lg text-amber-500 fa-solid fa-triangle-exclamation"></i>
                                                 </a>
                                             </div>
                                         </div>
-                                        <p class="mt-1 text-sm text-gray-500">
+                                        <p class="mt-1 text-sm text-gray-600">
                                             {{ $manual->category->description }}
                                         </p>
-                                        <p class="mt-1 text-xs text-gray-400">
+                                        <p class="mt-1 text-xs text-gray-500 line-clamp-2">
                                             {{ $manual->description }}
                                         </p>
-                                        <div class="flex flex-wrap items-center gap-4 mt-2">
+                                        <div class="flex flex-wrap items-center gap-4 mt-3">
                                             <span
-                                                class="px-2 py-1 text-xs font-medium rounded-full text-violet-800 bg-violet-100">
+                                                class="px-2.5 py-1 text-xs font-medium rounded-full text-violet-700 bg-violet-100 border border-violet-200">
                                                 {{ $manual->category->name }}
                                             </span>
                                             <div class="flex items-center text-xs text-gray-500">
-                                                <i class="mr-2 text-yellow-400 fas fa-calendar"></i>
+                                                <i class="mr-2 text-amber-500 fas fa-calendar"></i>
                                                 {{ $manual->created_at->format('M d, Y') }}
                                             </div>
                                             <div class="flex items-center text-xs text-gray-500">
-                                                <i class="mr-2 text-rose-400 fas fa-file"></i>{{ $manual->file_size }} MB
+                                                <i class="mr-2 text-rose-500 fas fa-file"></i>{{ $manual->file_size }} MB
                                             </div>
                                             <div class="flex items-center text-xs text-gray-500">
-                                                <i class="mr-2 text-teal-400 fa-solid fa-user-tie"></i>
+                                                <i class="mr-2 text-teal-500 fa-solid fa-user-tie"></i>
                                                 @if ($manual->uploaded_by_admin)
-                                                    {{ $manual->admin->name }} <span
-                                                        class="px-2 py-1 ml-2 font-medium rounded text-amber-900 bg-amber-200 text-xxs">Admin</span>
+                                                    {{ $manual->admin->name }}
+                                                    <span
+                                                        class="px-2 py-0.5 ml-2 text-2xs font-medium rounded text-amber-800 bg-amber-100 border border-amber-200">Admin</span>
                                                 @elseif ($manual->uploaded_by)
                                                     {{ $manual->user->name }}
                                                 @else

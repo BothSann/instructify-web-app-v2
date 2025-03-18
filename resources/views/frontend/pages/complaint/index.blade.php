@@ -89,16 +89,34 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         <!-- Complaint Item 1 -->
                         @foreach ($complaints as $complaint)
-                            <tr
-                                class="
-                                {{ $complaint->getComplaintStatusKey() == 'pending' ? ' bg-yellow-100' : '' }}
-                                {{ $complaint->getComplaintStatusKey() == 'resolved' ? ' bg-green-100' : '' }}
-                                {{ $complaint->getComplaintStatusKey() == 'dismissed' ? ' bg-red-100' : '' }}
-                                ">
+                            @php
+                                $statusKey = $complaint->getComplaintStatusKey();
+                                $rowBgClass = match ($statusKey) {
+                                    'pending' => 'bg-yellow-50',
+                                    'resolved' => 'bg-green-50',
+                                    'dismissed' => 'bg-red-50',
+                                    default => '',
+                                };
+
+                                $badgeClasses = match ($statusKey) {
+                                    'pending' => 'text-amber-800 bg-amber-100 border border-amber-200',
+                                    'resolved' => 'text-green-800 bg-green-100 border border-green-200',
+                                    'dismissed' => 'text-red-800 bg-red-100 border border-red-200',
+                                    default => 'text-gray-800 bg-gray-100 border border-gray-200',
+                                };
+                            @endphp
+
+                            <tr class="{{ $rowBgClass }} hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
-                                        <div class="flex items-center justify-center w-12 h-12 bg-purple-100 rounded">
-                                            <i class="text-xl text-red-600 fas fa-exclamation-circle"></i>
+                                        <div
+                                            class="flex items-center justify-center w-10 h-10 rounded-full 
+                                        {{ $statusKey == 'pending'
+                                            ? 'bg-amber-100 text-amber-600'
+                                            : ($statusKey == 'resolved'
+                                                ? 'bg-green-100 text-green-600'
+                                                : 'bg-red-100 text-red-600') }}">
+                                            <i class="text-lg fas fa-exclamation-circle"></i>
                                         </div>
                                         <div class="ml-4">
                                             <div class="text-sm font-medium text-gray-900">
@@ -111,19 +129,11 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm text-gray-900">{{ $complaint->created_at->format('M d, Y') }}</div>
+                                    <div class="text-sm text-gray-500">{{ $complaint->created_at->format('M d, Y') }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full
-                                        {{ $complaint->getComplaintStatusKey() == 'pending'
-                                            ? 'text-amber-900 bg-amber-300'
-                                            : ($complaint->getComplaintStatusKey() == 'resolved'
-                                                ? 'text-green-900 bg-green-300'
-                                                : ($complaint->getComplaintStatusKey() == 'dismissed'
-                                                    ? 'text-red-900 bg-red-300'
-                                                    : '')) }}
-                                    ">
+                                        class="inline-flex px-2.5 py-1 text-xs font-medium rounded-full {{ $badgeClasses }}">
                                         {{ $complaint->getComplaintStatusName() }}
                                     </span>
                                 </td>
