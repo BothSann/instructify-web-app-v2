@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Http\Middleware\CustomAuth;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //  
+        Route::aliasMiddleware('auth', CustomAuth::class);
     }
 }
