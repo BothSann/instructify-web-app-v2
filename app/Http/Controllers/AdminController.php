@@ -204,13 +204,49 @@ class AdminController extends Controller
         return back()->with("success", "Manual deleted successfully.");
     }
 
-    public function complaints() 
+    public function complaints(Request $request) 
     {
-        $complaints = Complaint::with('manual', 'user')->get();
+        $query = Complaint::with('manual', 'user');
+        
+        // Handle search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->whereHas('manual', function($mq) use ($searchTerm) {
+                    $mq->where('title', 'like', "%{$searchTerm}%");
+                })
+                ->orWhereHas('user', function($uq) use ($searchTerm) {
+                    $uq->where('name', 'like', "%{$searchTerm}%")
+                       ->orWhere('email', 'like', "%{$searchTerm}%");
+                })
+                ->orWhere('description', 'like', "%{$searchTerm}%");
+            });
+        }
+        
+        // Handle filter functionality
+        if ($request->has('filter') && in_array($request->filter, ['pending', 'resolved', 'dismissed'])) {
+            $query->where('status', $request->filter);
+        }
+        
+        $complaints = $query->get();
         $statuses = Complaint::$statuses;
         $admin = Auth::user();
         
-        return view('admin/pages/complaint/index', compact('complaints','statuses', 'admin'));
+        // Calculate counts for filters
+        $allCount = Complaint::count();
+        $pendingCount = Complaint::where('status', 'pending')->count();
+        $resolvedCount = Complaint::where('status', 'resolved')->count();
+        $dismissedCount = Complaint::where('status', 'dismissed')->count();
+        
+        return view('admin/pages/complaint/index', compact(
+            'complaints',
+            'statuses', 
+            'admin',
+            'allCount',
+            'pendingCount',
+            'resolvedCount',
+            'dismissedCount'
+        ));
     }
 
     public function resolveComplaint (Complaint $complaint) 
