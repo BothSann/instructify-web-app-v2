@@ -23,18 +23,39 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $manualsCount = Manual::count();
-        $complaintsCount = Complaint::count();
-        $usersCount = User::count();
-        $pendingApprovals = Manual::where('status', 'pending')->count();
-        $pendingComplaints = Complaint::where('status', 'pending')->count();
-        $resolvedComplaints = Complaint::where('status', 'resolved')->count();
-        $rejectedComplaints = Complaint::where('status', 'rejected')->count();  
-        return view("admin.dashboard", compact("manualsCount", "complaintsCount", "usersCount", "pendingApprovals", "pendingComplaints", "resolvedComplaints", "rejectedComplaints"));  
-    }
+/**
+ * Display a listing of the resource.
+ */
+public function index()
+{
+    // Total Users
+    $usersCount = User::count();
+    // Total Manuals
+    $manualsCount = Manual::count();
+    // Total Pending Approvals (Manuals)
+    $pendingApprovals = Manual::pending()->count();
+    // Total Approved Manuals
+    $approvedManuals = Manual::approved()->count();
+    // Total Rejected Manuals
+    $rejectedManuals = Manual::rejected()->count();
+    // Total Resolved Complaints
+    $resolvedComplaints = Complaint::resolved()->count();
+    // Total Pending Review Complaints
+    $pendingComplaints = Complaint::pending()->count();
+    // Total Dismissed Complaints
+    $dismissedComplaints = Complaint::dismissed()->count();
+
+    return view("admin.dashboard", compact(
+        "usersCount", 
+        "manualsCount", 
+        "pendingApprovals", 
+        "approvedManuals", 
+        "rejectedManuals", 
+        "resolvedComplaints", 
+        "pendingComplaints", 
+        "dismissedComplaints"
+    ));  
+}
 
     /**
      * Show the form for creating a new resource.
