@@ -5,7 +5,7 @@
              <div class="flex">
                  <div class="flex items-center flex-shrink-0 gap-4 mr-4">
                      <i class="text-2xl text-indigo-600 fas fa-book-open"></i>
-                     <span class="text-xl font-bold text-gray-800">Instructify Library</span>
+                     <span class="text-xl font-bold text-gray-800">Instructify Hub</span>
                  </div>
                  <nav class="hidden sm:ml-6 sm:flex sm:space-x-8">
                      <a href="{{ route('dashboard') }}"
