@@ -91,9 +91,9 @@
                         @foreach ($complaints as $complaint)
                             <tr
                                 class="
-                                {{ $complaint->getComplaintStatusKey() == 'pending' ? 'text-yellow-800 bg-yellow-100' : '' }}
-                                {{ $complaint->getComplaintStatusKey() == 'resolved' ? 'text-green-800 bg-green-100' : '' }}
-                                {{ $complaint->getComplaintStatusKey() == 'dismissed' ? 'text-red-800 bg-red-100' : '' }}
+                                {{ $complaint->getComplaintStatusKey() == 'pending' ? ' bg-yellow-100' : '' }}
+                                {{ $complaint->getComplaintStatusKey() == 'resolved' ? ' bg-green-100' : '' }}
+                                {{ $complaint->getComplaintStatusKey() == 'dismissed' ? ' bg-red-100' : '' }}
                                 ">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center">
@@ -115,13 +115,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
+                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full
                                         {{ $complaint->getComplaintStatusKey() == 'pending'
-                                            ? 'text-amber-950 bg-amber-300'
+                                            ? 'text-amber-900 bg-amber-300'
                                             : ($complaint->getComplaintStatusKey() == 'resolved'
-                                                ? 'text-green-800 bg-green-100'
+                                                ? 'text-green-900 bg-green-300'
                                                 : ($complaint->getComplaintStatusKey() == 'dismissed'
-                                                    ? 'text-red-800 bg-red-100'
+                                                    ? 'text-red-900 bg-red-300'
                                                     : '')) }}
                                     ">
                                         {{ $complaint->getComplaintStatusName() }}

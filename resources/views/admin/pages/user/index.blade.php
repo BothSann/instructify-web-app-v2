@@ -130,7 +130,7 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full {{ $user->is_banned == 1 ? 'text-red-800 bg-red-100' : 'text-green-800 bg-green-100' }} ">
+                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full {{ $user->is_banned == 1 ? 'text-red-800 bg-red-100' : 'text-green-800 bg-green-100' }} ">
                                         {{ $user->is_banned == 1 ? 'Banned' : 'Active' }}
                                     </span>
                                 </td>

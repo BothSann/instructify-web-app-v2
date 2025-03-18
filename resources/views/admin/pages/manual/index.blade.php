@@ -167,13 +167,13 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 text-blue-800 bg-blue-100 rounded-full ">
+                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full text-violet-800 bg-violet-100 ">
                                         {{ $manual->category->name ?? 'Uncategorized' }}
                                     </span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <span
-                                        class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
+                                        class="inline-flex px-2 py-1 text-xs font-semibold leading-5 rounded-full
                                           {{ $manual->status == 'pending' ? 'text-yellow-800 bg-yellow-200' : '' }}
                                           {{ $manual->status == 'approved' ? 'text-green-800 bg-green-200' : '' }}
                                           {{ $manual->status == 'rejected' ? 'text-red-800 bg-red-200' : '' }}

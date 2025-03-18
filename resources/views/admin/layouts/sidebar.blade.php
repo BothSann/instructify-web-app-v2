@@ -41,16 +41,13 @@
             </form>
         </div>
 
-        <div>
-            <form class="my-4 border-t border-indigo-700 rounded-lg hover:bg-indigo-700"
-                action="{{ route('admin.logout') }}" method="POST">
-                @csrf
-                <button type="submit" class="flex items-center px-4 py-3">
-                    <i class="mr-3 fas fa-sign-out-alt"></i>
-                    <span>Logout</span>
-                </button>
-            </form>
-        </div>
-
+        <form class="my-4 border-t border-indigo-700 rounded-lg hover:bg-indigo-700"
+            action="{{ route('admin.logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="flex items-center px-4 py-3">
+                <i class="mr-3 fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </button>
+        </form>
     </nav>
 </div>
