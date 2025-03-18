@@ -1,10 +1,15 @@
 <x-guest-layout>
     <!-- Session Status -->
     @if (session('error'))
-        <div class="p-4 mb-4 text-sm font-medium text-white bg-red-600 rounded-lg">
+        <div class="p-4 mb-4 text-sm font-medium text-white bg-red-700 rounded-lg">
             {{ session('error') }}
         </div>
+    @elseif (session('info'))
+        <div class="p-4 mb-4 text-sm font-medium text-blue-700 bg-blue-100 rounded-lg">
+            {{ session('info') }}
+        </div>
     @endif
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
 
