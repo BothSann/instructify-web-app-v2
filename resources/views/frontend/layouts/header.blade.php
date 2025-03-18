@@ -37,7 +37,7 @@
              <div class="hidden sm:ml-6 sm:flex sm:items-center">
                  <div class="relative ml-3">
                      <div class="flex items-center gap-2">
-                         <span class="mr-1 text-xs text-gray-500 ">
+                         <span class="mr-1 text-sm text-gray-500 ">
                              @auth
                                  {{ Auth::user()->name }}
                              @else
