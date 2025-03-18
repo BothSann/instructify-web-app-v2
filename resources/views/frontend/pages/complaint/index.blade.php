@@ -1,17 +1,17 @@
 @extends('frontend.layouts.master')
 @section('content')
-    @if (session('success'))
-        <div class="px-4 py-3 mb-4 text-sm text-green-700 bg-green-100 rounded">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="px-4 py-3 mb-4 text-sm text-red-700 bg-red-100 rounded">
-            {{ session('error') }}
-        </div>
-    @endif
     <div class="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        @if (session('success'))
+            <div class="px-4 py-3 mb-4 text-sm text-green-700 bg-green-100 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="px-4 py-3 mb-4 text-sm text-red-700 bg-red-100 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="overflow-hidden bg-white rounded-lg shadow">
             <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
                 <h1 class="text-xl font-semibold text-gray-900">
@@ -117,7 +117,7 @@
                                     <span
                                         class="inline-flex px-2 text-xs font-semibold leading-5 rounded-full
                                         {{ $complaint->getComplaintStatusKey() == 'pending'
-                                            ? 'text-yellow-800 bg-yellow-100'
+                                            ? 'text-amber-950 bg-amber-300'
                                             : ($complaint->getComplaintStatusKey() == 'resolved'
                                                 ? 'text-green-800 bg-green-100'
                                                 : ($complaint->getComplaintStatusKey() == 'dismissed'
