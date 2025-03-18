@@ -102,8 +102,9 @@
                                                     <i class="fas fa-download"></i>
                                                 </a>
                                                 <a href="{{ route('complaints.create', ['manual_id' => $manual->id]) }}"
-                                                    class="text-red-600 hover:text-red-900" title="Submit Complaint">
-                                                    <i class="fas fa-exclamation-circle"></i>
+                                                    title="Submit Complaint">
+                                                    <i
+                                                        class="text-lg text-yellow-300 fa-solid fa-triangle-exclamation hover:text-yellow-600"></i>
                                                 </a>
                                             </div>
                                         </div>
