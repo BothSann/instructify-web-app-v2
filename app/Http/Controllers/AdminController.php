@@ -232,11 +232,34 @@ class AdminController extends Controller
         return redirect()->back()->with('success', 'Complaint has been dismissed');
     }
 
-    public function users() 
+    public function users(Request $request) 
     {
-        $users = User::all();
-        $totalUsers = User::count(); 
-        return view('admin.pages.user.index', compact('users', 'totalUsers'));
+        $query = User::query();
+        
+        // Handle search functionality
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $query->where(function($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                  ->orWhere('email', 'like', "%{$searchTerm}%");
+            });
+        }
+        
+        // Handle filter functionality
+        if ($request->has('filter')) {
+            if ($request->filter === 'banned') {
+                $query->where('is_banned', 1);
+            } elseif ($request->filter === 'active') {
+                $query->where('is_banned', 0);
+            }
+        }
+        
+        $users = $query->get();
+        $totalUsers = User::count();
+        $bannedUsers = User::where('is_banned', 1)->count();
+        $activeUsers = User::where('is_banned', 0)->count();
+        
+        return view('admin.pages.user.index', compact('users', 'totalUsers', 'bannedUsers', 'activeUsers'));
     }
 
     public function banUser (User $user) 
