@@ -64,9 +64,9 @@
                              <form action="{{ route('logout') }}" method="POST">
                                  @csrf
                                  <button type="submit"
-                                     class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                     <div class="flex items-center justify-center w-8 h-8 bg-indigo-100 rounded-full">
-                                         <i class="text-sm text-indigo-600 fas fa-sign-out-alt"></i>
+                                     class="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500">
+                                     <div class="flex items-center justify-center w-8 h-8 rounded-full bg-rose-100">
+                                         <i class="text-sm text-rose-600 fas fa-sign-out-alt"></i>
                                      </div>
                                  </button>
                              </form>

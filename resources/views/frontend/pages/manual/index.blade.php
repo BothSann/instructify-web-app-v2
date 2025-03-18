@@ -99,7 +99,7 @@
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('manuals.download', $manual) }}"
                                                     class="text-green-600 hover:text-green-900" title="Download">
-                                                    <i class="fas fa-download"></i>
+                                                    <i class="text-lg fas fa-download"></i>
                                                 </a>
                                                 <a href="{{ route('complaints.create', ['manual_id' => $manual->id]) }}"
                                                     title="Submit Complaint">
@@ -114,23 +114,23 @@
                                         <p class="mt-1 text-xs text-gray-400">
                                             {{ $manual->description }}
                                         </p>
-                                        <div class="flex flex-wrap items-center gap-2 mt-2">
+                                        <div class="flex flex-wrap items-center gap-4 mt-2">
                                             <span
-                                                class="px-2 py-1 mb-1 mr-2 text-xs font-medium rounded-full text-violet-800 bg-violet-100">
+                                                class="px-2 py-1 text-xs font-medium rounded-full text-violet-800 bg-violet-100">
                                                 {{ $manual->category->name }}
                                             </span>
-                                            <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 text-yellow-400 fas fa-calendar"></i>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <i class="mr-2 text-yellow-400 fas fa-calendar"></i>
                                                 {{ $manual->created_at->format('M d, Y') }}
                                             </div>
-                                            <div class="flex items-center mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="mr-1 text-rose-400 fas fa-file"></i>{{ $manual->file_size }} MB
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <i class="mr-2 text-rose-400 fas fa-file"></i>{{ $manual->file_size }} MB
                                             </div>
-                                            <div class="flex items-center gap-1 mb-1 mr-2 text-xs text-gray-500">
-                                                <i class="text-teal-400 fa-solid fa-user-tie"></i>
+                                            <div class="flex items-center text-xs text-gray-500">
+                                                <i class="mr-2 text-teal-400 fa-solid fa-user-tie"></i>
                                                 @if ($manual->uploaded_by_admin)
                                                     {{ $manual->admin->name }} <span
-                                                        class="px-2 py-1 ml-2 font-medium text-green-800 bg-green-100 rounded text-xxs">Admin</span>
+                                                        class="px-2 py-1 ml-2 font-medium rounded text-amber-900 bg-amber-200 text-xxs">Admin</span>
                                                 @elseif ($manual->uploaded_by)
                                                     {{ $manual->user->name }}
                                                 @else

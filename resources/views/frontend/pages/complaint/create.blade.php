@@ -38,12 +38,12 @@
                     </p>
                     <div class="flex mt-2">
                         <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mr-2">
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-violet-100 text-violet-800 mr-2">
                             {{ $manual->category->name }}
                         </span>
                         <span
                             class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                            Approved
+                            {{ $manual->getManualStatusName() }}
                         </span>
                     </div>
                 </div>
