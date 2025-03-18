@@ -50,6 +50,11 @@ class Manual extends Model
         return $this->hasMany(Complaint::class);
     }
 
+    public function getManualStatusName()
+    {
+        return self::$statuses[$this->status] ?? 'Unknown';
+    }
+
     /**
      * Scope a query to only include approved manuals.
      */
