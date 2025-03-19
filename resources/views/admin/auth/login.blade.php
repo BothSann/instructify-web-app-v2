@@ -4,7 +4,7 @@
 
     <!-- Displaying admin heading-->
     <h3 class="font-bold text-center text-red-700 ">
-        Admin
+        Admin Login
     </h3>
 
     <form method="POST" action="{{ route('admin.login.post') }}">
