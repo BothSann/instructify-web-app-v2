@@ -24,7 +24,7 @@ class StoreComplaintRequest extends FormRequest
         return [
             //
             'complaint_type' => ['required', 'in:inaccurate,incomplete,outdated,inappropriate,other'],
-            'description' => ['required', 'string', 'min:10', 'max:150'],
+            'description' => ['required', 'string', 'min:10', 'max:255'],
         ];
     }
 }
