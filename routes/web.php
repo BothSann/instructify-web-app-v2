@@ -5,10 +5,22 @@ use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\ManualController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 // Route::get('/', function () {
 //     return view('welcome');
 // })->middleware('custom.guest:web,admin');
+
+
+Route::get('/auth/github/redirect', function () {
+    return Socialite::driver('github')->redirect();
+});
+ 
+Route::get('/auth/github/callback', function () {
+    $user = Socialite::driver('github')->user();
+    dd($user);
+});
+
 
 Route::get('/', [FrontendController::class,'index'])->name('homepage')->middleware(['custom.guest:web,admin']);
 
