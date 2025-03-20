@@ -36,6 +36,14 @@
                                     <input type="text" name="search" id="search"
                                         class="block w-full h-10 pl-10 border-gray-300 rounded-none focus:ring-indigo-500 focus:border-indigo-500 rounded-l-md sm:text-sm"
                                         placeholder="Search manuals..." value="{{ request('search') }}" />
+                                    @if (request('search'))
+                                        <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                            <button type="button" onclick="clearSearch()"
+                                                class="text-gray-400 hover:text-gray-500">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    @endif
                                 </div>
                                 <button type="submit"
                                     class="relative inline-flex items-center px-4 py-2 -ml-px space-x-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-r-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -48,8 +56,7 @@
                                 <!-- Category Filter -->
                                 <div class="mt-2 sm:mt-0 sm:mr-4">
                                     <select id="category" name="category"
-                                        class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        onchange="this.form.submit()">
+                                        class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="">All Categories</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
@@ -61,10 +68,9 @@
                                 </div>
 
                                 <!-- Sort By -->
-                                <div class="mt-2 sm:mt-0">
+                                <div class="mt-2 sm:mt-0 sm:mr-4">
                                     <select id="sort" name="sort"
-                                        class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                                        onchange="this.form.submit()">
+                                        class="block w-full py-2 pl-3 pr-10 text-base border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
                                         <option value="relevance" {{ request('sort') == 'relevance' ? 'selected' : '' }}>
                                             Sort by: Relevance</option>
                                         <option value="newest"
@@ -74,6 +80,24 @@
                                             {{ request('sort') == 'alphabetical' ? 'selected' : '' }}>A-Z</option>
                                     </select>
                                 </div>
+
+                                <!-- Apply Filters Button -->
+                                <div class="mt-2 sm:mt-0 sm:mr-2">
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Apply Filters
+                                    </button>
+                                </div>
+
+                                <!-- Clear Filters Button - Only show if any filter is applied -->
+                                @if (request('search') || request('category') || request('sort'))
+                                    <div class="mt-2 sm:mt-0">
+                                        <a href="{{ route('manuals.index') }}"
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                            Clear All
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </form>
                     </div>
@@ -204,3 +228,13 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function clearSearch() {
+            document.getElementById('search').value = '';
+            // If you want to automatically submit the form after clearing:
+            // document.querySelector('form').submit();
+        }
+    </script>
+@endpush

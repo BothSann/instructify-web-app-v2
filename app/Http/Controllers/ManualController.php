@@ -88,35 +88,49 @@ class ManualController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        $category = $request->input('category');
+        $sort = $request->input('sort', 'newest');
         
         // Query with relationships
-        $query = Manual::with(['category', 'user']);
+        $query = Manual::with(['category', 'user', 'admin']);
         
         // Apply search if provided
         if ($search) {
             $query->where(function($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                ->orWhere('description', 'like', "%{$search}%");
+                  ->orWhere('description', 'like', "%{$search}%");
             });
         }
         
         // Filter by category if selected
-        if ($request->has('category') && $request->category) {
-            $query->where('category_id', $request->category);
+        if ($category) {
+            $query->where('category_id', $category);
         }
         
         // Apply sorting
-        $sortOption = $request->input('sort', 'newest');
-        
-        switch ($sortOption) {
+        switch ($sort) {
             case 'newest':
                 $query->orderBy('created_at', 'desc');
                 break;
             case 'alphabetical':
                 $query->orderBy('title', 'asc');
                 break;
-            case 'downloads':
-                $query->orderBy('created_at', 'desc'); // Fallback to newest
+            case 'relevance':
+                // Only apply relevance sorting if there's a search term
+                if ($search) {
+                    // You could implement a more complex relevance algorithm here
+                    $query->orderByRaw("
+                        CASE 
+                            WHEN title LIKE ? THEN 1
+                            WHEN title LIKE ? THEN 2
+                            WHEN description LIKE ? THEN 3
+                            ELSE 4
+                        END", 
+                        ["{$search}%", "%{$search}%", "%{$search}%"]
+                    );
+                } else {
+                    $query->orderBy('created_at', 'desc'); // Default to newest if no search term
+                }
                 break;
             default:
                 $query->orderBy('created_at', 'desc');
@@ -124,10 +138,13 @@ class ManualController extends Controller
         
         // Apply status filter - only show approved manuals
         $query->where('status', 'approved');
-
-        // Filter out manuals from banned users
-        $query->whereHas('user', function($q) {
-            $q->where('is_banned', false);
+    
+        // Filter out manuals from banned users - only for user-uploaded manuals
+        $query->where(function($q) {
+            $q->where('uploaded_by_admin', true)
+              ->orWhereHas('user', function($query) {
+                  $query->where('is_banned', false);
+              });
         });
         
         // Get results
@@ -137,7 +154,7 @@ class ManualController extends Controller
         $categories = Category::all();
         
         // Search indicator for the view
-        $searchPerformed = !empty($search);
+        $searchPerformed = !empty($search) || !empty($category);
         
         return view('frontend.pages.manual.index', compact('manuals', 'categories', 'searchPerformed', 'search'));
     }
