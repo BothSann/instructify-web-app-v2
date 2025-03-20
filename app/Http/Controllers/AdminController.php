@@ -213,6 +213,12 @@ public function index()
 
         return back()->with("success","Manual rejected successfully.");
     }
+    
+    public function createManual()
+    {
+        $categories = Category::all();
+        return view('admin.pages.manual.create', compact('categories'));
+    }
 
     public function destroyManual (Manual $manual) 
     {
@@ -379,11 +385,7 @@ public function index()
             ->with('success', 'User deleted successfully.');
     }
 
-    public function createManual()
-    {
-        $categories = Category::all();
-        return view('admin.pages.manual.create', compact('categories'));
-    }
+
     
 
 }
