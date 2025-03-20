@@ -1,4 +1,8 @@
 <x-guest-layout>
+    <!-- Displaying admin heading-->
+    <h3 class="mb-2 font-bold text-center text-gray-700">
+        Admin Update Password
+    </h3>
     <form method="POST" action="{{ route('admin.password.store') }}">
         @csrf
 

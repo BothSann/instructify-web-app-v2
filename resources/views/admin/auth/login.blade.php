@@ -3,7 +3,7 @@
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
     <!-- Displaying admin heading-->
-    <h3 class="font-bold text-center text-red-700 ">
+    <h3 class="font-bold text-center text-gray-700 ">
         Admin Login
     </h3>
 
